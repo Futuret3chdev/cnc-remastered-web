@@ -32,17 +32,28 @@ html, body {
     rgba(0,0,0,0.85),
     rgba(0,0,0,0.6)
   );
-  border-bottom: 1px solid rgba(120,255,120,0.35);
-  color: #9fffa0;
+  border-bottom: 1px solid rgba(255,120,220,0.55);
+  color: #ffd2ff;
   font-size: 13px;
   letter-spacing: 0.6px;
-  text-shadow: 0 0 6px rgba(0,255,0,0.35);
+  text-shadow: 0 0 8px rgba(255,0,170,0.45);
   pointer-events: none; /* IMPORTANT */
   z-index: 10;
 }
 
 #brand-bar strong {
   color: #ffffff;
+}
+
+#gta-tag {
+  margin-left: 10px;
+  padding: 2px 8px;
+  border: 1px solid rgba(255,120,220,0.7);
+  border-radius: 999px;
+  background: rgba(255, 0, 160, 0.15);
+  color: #ffd7ff;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 /* ===== FULLSCREEN BUTTON ===== */
@@ -75,6 +86,35 @@ canvas {
   display: block;
   cursor: none;
 }
+
+#gtaBtn {
+  position: fixed;
+  top: 6px;
+  right: 126px;
+  z-index: 11;
+  background: rgba(255,0,170,0.22);
+  color: white;
+  border: 1px solid rgba(255,120,220,0.65);
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+body.gta-mode {
+  background: radial-gradient(circle at 40% 10%, #2b0032, #050006 60%);
+}
+
+body.gta-mode #brand-bar {
+  background: linear-gradient(
+    to bottom,
+    rgba(35,0,35,0.95),
+    rgba(14,0,18,0.82)
+  );
+}
+
+body.gta-mode canvas {
+  box-shadow: 0 0 26px rgba(255, 0, 166, 0.4);
+}
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
@@ -84,9 +124,11 @@ canvas {
 <body>
 
 <div id="brand-bar">
-  REMASTERED BY <strong> FutureT3ch</strong> × <strong>MemeTorrent</strong>
+  GTA-STYLE REMASTER BY <strong> FutureT3ch</strong> × <strong>MemeTorrent</strong>
+  <span id="gta-tag">GTA MODE READY</span>
 </div>
 
+<button id="gtaBtn">TOGGLE GTA</button>
 <button id="fsBtn">FULLSCREEN</button>
 
 <div id="game-wrapper">
@@ -120,6 +162,15 @@ document.getElementById("fsBtn").onclick = () => {
   } else {
     document.exitFullscreen();
   }
+};
+
+/* GTA look toggle */
+const gtaBtn = document.getElementById("gtaBtn");
+gtaBtn.onclick = () => {
+  document.body.classList.toggle("gta-mode");
+  gtaBtn.textContent = document.body.classList.contains("gta-mode")
+    ? "GTA ON"
+    : "TOGGLE GTA";
 };
 </script>
 
